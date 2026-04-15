@@ -358,11 +358,33 @@ img {
 }
 
 @media (max-width: 55.99rem) {
+  /* Logo a sinistra, hamburger a destra (nav fuori dal flex in riga) */
+  .container--header {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .nav-toggle {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .nav {
+    order: 3;
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 0;
+  }
+
   .site-header.is-open .nav {
     position: absolute;
     left: 0;
     right: 0;
     top: 100%;
+    flex: none;
+    width: auto;
+    order: unset;
     flex-direction: column;
     align-items: stretch;
     padding: var(--space-4);
@@ -587,10 +609,19 @@ main .section:not(.section--hero) {
 .section--chi {
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(ellipse 55% 60% at 12% 15%, rgb(46 109 180 / 0.14) 0%, transparent 52%),
-    radial-gradient(ellipse 50% 45% at 92% 85%, rgb(26 58 107 / 0.1) 0%, transparent 48%),
-    linear-gradient(180deg, #e4ebf5 0%, var(--color-bg) 48%, #eef2f9 100%);
+  background-color: #0f1c2e;
+  background-image:
+    radial-gradient(ellipse 90% 80% at 50% 40%, rgb(15 36 68 / 0.35) 0%, transparent 55%),
+    linear-gradient(160deg, rgb(10 26 46 / 0.88) 0%, rgb(26 58 107 / 0.72) 48%, rgb(8 18 32 / 0.92) 100%),
+    url("img/mani.avif");
+  background-size: cover;
+  background-position: center 42%;
+  background-repeat: no-repeat;
+}
+
+.section--chi .section__title {
+  color: var(--color-white);
+  text-shadow: 0 2px 20px rgb(0 0 0 / 0.35);
 }
 
 .chi-wrap {
@@ -704,6 +735,30 @@ main .section:not(.section--hero) {
 @media (prefers-reduced-motion: reduce) {
   .chi-pillar:hover {
     transform: none;
+  }
+}
+
+/* ---------- Immagini di contenuto (no hero) ---------- */
+.inline-figure {
+  margin: var(--space-6) 0 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+}
+
+.inline-figure__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 12rem;
+  object-fit: cover;
+  aspect-ratio: 3 / 2;
+}
+
+@media (min-width: 48rem) {
+  .inline-figure__img {
+    max-height: 15rem;
   }
 }
 
@@ -1307,13 +1362,95 @@ main .section:not(.section--hero) .section__title {
     align-items: start;
   }
 
-  .two-col--reverse .two-col__main {
-    order: 2;
+  .two-col--invalidita {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    align-items: stretch;
   }
 
-  .two-col--reverse .two-col__aside {
-    order: 1;
+  .two-col--legge104 {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    align-items: stretch;
   }
+}
+
+.invalidita__figure,
+.legge104__figure {
+  margin: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+}
+
+.invalidita__figure {
+  background: var(--color-bg);
+}
+
+.legge104__figure {
+  background: var(--color-white);
+}
+
+.invalidita__img,
+.legge104__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 48rem) {
+  .invalidita__figure,
+  .legge104__figure {
+    position: relative;
+    min-height: 0;
+  }
+
+  #invalidita .invalidita__figure {
+    align-self: start;
+    width: 100%;
+    max-height: min(24rem, 52vh);
+    aspect-ratio: 4 / 3;
+  }
+
+  .invalidita__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .legge104__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+#invalidita .container > .section__title,
+#legge-104 .container > .section__title {
+  text-align: center;
+  margin-bottom: var(--space-6);
+}
+
+#invalidita .invalidita__body,
+#legge-104 .legge104__body {
+  text-align: left;
+}
+
+#invalidita .invalidita__body .section__text,
+#legge-104 .legge104__body .section__text {
+  max-width: 48rem;
+  margin-inline: 0;
+}
+
+#invalidita .invalidita__body .checklist,
+#legge-104 .legge104__body .checklist {
+  max-width: 42rem;
+  margin-inline: 0;
 }
 
 .aside__title {
@@ -1641,4 +1778,238 @@ main .section:not(.section--hero) .section__title {
 
 .reveal--delay {
   transition-delay: 0.1s;
+}
+
+/* ============================================
+   Mobile (≤47.99rem): solo refinos; il layout
+   desktop resta governato dai min-width sopra
+   ============================================ */
+@media (max-width: 47.99rem) {
+  html {
+    overflow-x: clip;
+  }
+
+  body {
+    overflow-x: clip;
+    padding-bottom: max(5rem, calc(4.5rem + env(safe-area-inset-bottom, 0px)));
+  }
+
+  .container {
+    padding-inline: max(var(--space-3), env(safe-area-inset-left, 0px))
+      max(var(--space-3), env(safe-area-inset-right, 0px));
+  }
+
+  .container--header {
+    gap: var(--space-2);
+    padding-inline: max(var(--space-3), env(safe-area-inset-left, 0px))
+      max(var(--space-3), env(safe-area-inset-right, 0px));
+  }
+
+  .brand__mark {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .section {
+    padding-block: var(--space-10);
+  }
+
+  main .section:not(.section--hero) {
+    padding-block: calc(var(--space-10) + var(--space-2)) var(--space-10);
+  }
+
+  .section--hero {
+    padding-block: var(--space-10) var(--space-8);
+  }
+
+  .section__title {
+    margin-bottom: var(--space-6);
+    font-size: clamp(1.5rem, 5.5vw, 2rem);
+    text-wrap: balance;
+  }
+
+  .section__text,
+  .section__text--light {
+    font-size: var(--fs-base);
+    text-wrap: pretty;
+  }
+
+  .hero__grid {
+    gap: var(--space-6);
+  }
+
+  .hero__title {
+    font-size: clamp(1.45rem, 6.5vw, 2.35rem);
+    text-wrap: balance;
+  }
+
+  .hero__lead {
+    margin-top: var(--space-4);
+  }
+
+  .hero__panel {
+    padding-block: var(--space-2);
+  }
+
+  .hero__viz {
+    max-width: min(21rem, 100%);
+    min-height: 16.5rem;
+  }
+
+  .hero__chip {
+    font-size: 0.62rem;
+    padding: var(--space-2) var(--space-2);
+    max-width: calc(100vw - 2 * var(--space-3));
+  }
+
+  .hero__chip--tr {
+    max-width: 11rem;
+    right: 0;
+    left: auto;
+  }
+
+  .hero__card--main {
+    margin-top: var(--space-6);
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .hero__card--accent {
+    right: 0;
+    bottom: 0.25rem;
+  }
+
+  .btn--lg {
+    min-height: 2.75rem;
+    padding-inline: var(--space-4);
+  }
+
+  .cards-grid {
+    gap: var(--space-4);
+  }
+
+  .card {
+    padding: var(--space-5);
+  }
+
+  .trust-grid {
+    gap: var(--space-4);
+  }
+
+  .step {
+    padding: var(--space-4);
+    gap: var(--space-3);
+  }
+
+  .step__title {
+    font-size: var(--fs-base);
+  }
+
+  .faq__q {
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--fs-sm);
+    padding-right: var(--space-8);
+  }
+
+  .faq__a {
+    padding-inline: var(--space-4);
+    padding-bottom: var(--space-4);
+  }
+
+  .contact-form {
+    padding: var(--space-5);
+  }
+
+  .chi-card {
+    padding: var(--space-5);
+  }
+
+  .chi-pillar {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  /* Sotto ~768px: checklist a colonna singola (anche tra 640–768px evita celle troppo strette) */
+  .checklist--columns {
+    grid-template-columns: 1fr;
+  }
+
+  .bullet-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #invalidita .two-col--invalidita,
+  #legge-104 .two-col--legge104 {
+    gap: var(--space-6);
+  }
+
+  /* Legge 104: su mobile immagine sopra, testo sotto (desktop resta testo | immagine) */
+  #legge-104 .legge104__figure {
+    order: -1;
+  }
+
+  .checklist li {
+    overflow-wrap: break-word;
+  }
+
+  .pain-card {
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .pain-foot {
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .pain-foot__text {
+    font-size: var(--fs-base);
+  }
+
+  .site-footer {
+    padding-block: var(--space-10) max(var(--space-8), env(safe-area-inset-bottom, 0px));
+    padding-inline: env(safe-area-inset-left, 0px) env(safe-area-inset-right, 0px);
+  }
+
+  .footer__top {
+    margin-bottom: var(--space-8);
+  }
+
+  .brand--footer {
+    margin-inline: auto;
+    margin-bottom: var(--space-6);
+  }
+
+  .footer__cols {
+    gap: var(--space-6);
+    text-align: center;
+  }
+
+  .footer__links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer__links a,
+  .footer__links li {
+    word-break: break-word;
+  }
+
+  .footer__copy {
+    font-size: 0.8125rem;
+    padding-inline: var(--space-2);
+  }
+
+  .inline-figure__img {
+    max-height: 10rem;
+  }
+
+  .mobile-cta {
+    padding-inline: max(var(--space-3), env(safe-area-inset-left, 0px))
+      max(var(--space-3), env(safe-area-inset-right, 0px));
+  }
+}
+
+/* Una colonna per le card “problemi” sotto ~640px (evita colonne troppo strette) */
+@media (max-width: 39.99rem) {
+  .pain-grid {
+    grid-template-columns: 1fr;
+  }
 }
