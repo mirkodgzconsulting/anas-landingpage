@@ -1475,13 +1475,16 @@ main .section:not(.section--hero) .section__title {
 .contact-form.contact-form--opnform {
   max-width: min(600px, 100%);
   margin-inline: auto;
-  padding: var(--space-4);
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
 }
 
 .contact-form.contact-form--opnform .opnform-embed__iframe {
   display: block;
   width: 100%;
-  height: 360px;
+  height: 560px;
   border: 0;
   border-radius: var(--radius);
 }
@@ -2144,11 +2147,11 @@ main .section:not(.section--hero) .section__title {
   }
 
   .contact-form.contact-form--opnform {
-    padding: var(--space-3);
+    padding: 0;
   }
 
   .contact-form.contact-form--opnform .opnform-embed__iframe {
-    height: 360px;
+    height: 500px;
   }
 
   .chi-card {
