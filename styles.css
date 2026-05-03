@@ -1480,6 +1480,9 @@ main .section:not(.section--hero) .section__title {
 
 .contact-form.contact-form--opnform .opnform-embed__iframe {
   display: block;
+  width: 100%;
+  height: 360px;
+  border: 0;
   border-radius: var(--radius);
 }
 
@@ -2138,6 +2141,14 @@ main .section:not(.section--hero) .section__title {
 
   .contact-form {
     padding: var(--space-5);
+  }
+
+  .contact-form.contact-form--opnform {
+    padding: var(--space-3);
+  }
+
+  .contact-form.contact-form--opnform .opnform-embed__iframe {
+    height: 360px;
   }
 
   .chi-card {
