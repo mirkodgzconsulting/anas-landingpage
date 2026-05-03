@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" href="logo-anas.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <script type="application/ld+json">
   {
@@ -477,26 +477,22 @@
         <div class="form-intro reveal">
           <h2 class="section__title">Compila il form: ti ricontattiamo entro 24 ore</h2>
         </div>
-        <div class="contact-form reveal ghl-form-embed" id="form-contatto">
+        <!-- Formulario: OpnForm self-hosted → notificaciones vía SMTP (ej. Resend) en tu instancia. -->
+        <div class="contact-form contact-form--opnform reveal" id="form-contatto">
           <iframe
-            src="https://api.leadconnectorhq.com/widget/form/9bgBKGTlUdQuhCMiIRGI"
-            style="width:100%;min-height:536px;height:536px;border:none;border-radius:var(--radius,8px)"
-            id="inline-9bgBKGTlUdQuhCMiIRGI"
-            data-layout="{'id':'INLINE'}"
-            data-trigger-type="alwaysShow"
-            data-trigger-value=""
-            data-activation-type="alwaysActivated"
-            data-activation-value=""
-            data-deactivation-type="neverDeactivate"
-            data-deactivation-value=""
-            data-form-name="Richiesta Invalidita - Form"
-            data-height="536"
-            data-layout-iframe-id="inline-9bgBKGTlUdQuhCMiIRGI"
-            data-form-id="9bgBKGTlUdQuhCMiIRGI"
-            title="Richiesta Invalidita - Form"
+            class="opnform-embed__iframe"
+            style="border: none; width: 100%; min-height: 520px"
+            id="invalidita-civile-lgtuvp"
+            title="Modulo richiesta invalidità civile – OpnForm"
+            src="https://forms.dgzconsulting.com/forms/invalidita-civile-lgtuvp"
           ></iframe>
         </div>
-        <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+        <script
+          type="text/javascript"
+          defer
+          src="https://forms.dgzconsulting.com/widgets/iframe.min.js"
+          onload="initEmbed('invalidita-civile-lgtuvp')"
+        ></script>
       </div>
     </section>
   </main>
